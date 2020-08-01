@@ -65,3 +65,10 @@ Para iphone agregar estos metadata para IOS en el index.html
     <meta name="apple-mobile-web-app-title" content="Recetas" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-status-bar-style" content="black-translucent" />
+
+
+
+---- ¿Qué es un Service Worker? ----
+Son la característica más importante de una PWA.
+Es lo que hace posible que las PWA funcionen, es un script que nuestro navegador corre detrás de escena y este no puede tocar el DOM.
+Podemos tener control absoluto a nivel red de nuestra aplicación gracias a los service workers. Por lo que podemos dar soporte Offline o tambien podemos usar push notifications
