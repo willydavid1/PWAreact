@@ -34,3 +34,34 @@ El diagnostico de Performance nos muestra dos de los conceptos más importantes 
 ¿Cómo bajamos estos tiempos?
 Para bajar el Time To First Meaningful Paint (TTFMP - momento donde nuestra app se puede ver) podemos hacer Server Side Rendering, reducir el tamaño de nuestro HTML y CSS o simplemente teniendo servidores más rápidos O usar CDNS.
 El Time To Interactive tiene mucho que ver con el framework que estemos utilizando,   queremos que tarde menos de 5 segundos.
+
+
+---- Creando un Web Manifest ----
+En esta clase vamos a ver cómo implementar la funcionalidad de Add to Homescreen.
+
+Nota IMPORTANTE:
+
+Al momento de crear este curso esta saliendo Chrome 68, dicha versión va a cambiar el comportamiento del Add to Homescreen sutilmente.
+create-react-app nos da un Web Manifest pre armado el cual debemos configurar. Todo lo que tiene que ver con nuestro Web Manifest está dentro de los archivos index.html y manifest.json de la carpeta public de nuestro proyecto.
+
+Por el momento vamos a trabajar dentro del archivo manifest.json, en el podemos ver varios atributos, los cuales son:
+• short_name: Es el nombre que se utiliza en la Homescreen.
+• name: Es el nombre de nuestra aplicación.
+• icons: Especifica un array de imágenes que servirán como iconos de la aplicación. Cambiaremos el “favicon.ico” por “icon.png”, especificamos el tamaño a 512x512 y el tipo a “image/png”.
+• start_url: Nos indica en que página comienza nuestra aplicación, por compatibilidad siempre conviene que sea “/” en lugar de “./index.html”.
+• display: Define el modo de visualización para la aplicación. Standalone significa que la aplicación puede correr por su misma.
+• theme_color: Define qué color vamos a usar en la barra de tareas de Android para que combine con nuestra aplicación.
+• related_applications: Sirve si queremos que Chrome en el Add to Homescreen recomiende una aplicación del Store.
+
+Para probar nuestro Add to Homescreen debemos tener en cuenta que un requisito fundamental de las PWA es que todo funcione con HTTPS.
+Nuestra aplicación por defecto es fullscreen, así que NO OLVIDES de brindar un camino al home.
+En iOS necesitamos añadir alguna metadata al index.html de nuestro proyecto. Al momento de probar nuestra aplicación en iOS nos daremos cuenta de que el Add to Homescreen en este caso debe ser añadido manualmente por el usuario.
+
+-NGROK: es un tunel con un servidor HTTPS y que dirije directamente a nuestra PC
+tenemos que instalar NGROK y pasamos el archivo ngrok a una ruta cualquiera puede ser la raiz, y logearnos https://dashboard.ngrok.com/get-started/setup ya luego tenemos que iniciar el build en local (ejemplo puerto 4000 esta corriendo en local) y pasar el puerto a NGROK asi ./ngrok http 4000 con eso ya tenemos nuestra URL con HTTPS
+
+Para iphone agregar estos metadata para IOS en el index.html
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <meta name="apple-mobile-web-app-title" content="Recetas" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-status-bar-style" content="black-translucent" />
