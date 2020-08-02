@@ -124,3 +124,24 @@ Es recomendable esta estrategia cuando queremos mucha velocidad y estamos maneja
 • Network First es otra estrategia de carga, se encarga mandar la petición a internet, si la conexión a internet esta caída entonces tomara la información que tenga almacenada en cache.
 
 Al momento de escribir nuestras estrategias en Workbox SI IMPORTA el orden en que pongamos las cosas, si queremos una estrategia o regla por defecto debemos poner esa regla hasta el final de todo.
+
+
+---- Google Analytics Offline ----
+En esta clase vamos a implementar Google Analytics con soporte offline en nuestra aplicación.
+Como primer paso debemos incorporar react-ga, un plugin que nos permite correr Google Analytics dentro de React.
+Para unir nuestro plugin a la historia de React Router la mejor opción es incorporarlo dentro de la historia de la aplicación cambiando el BrowserRouter por un Router común, creamos un nuevo history para poder extender los métodos del Router, y que cada vez que el usuario cambie de pagina haga tracking de una page view.
+Si tienes algún AdBlocker desactívalo cuando estés desarrollando tu sitio para que evitar que bloqueé Google Analytics.
+Workbox ya cuenta con un método para facilitar que Google Analytics funcione de forma offline, va a capturar todas las peticiones que hagamos a GA, las va a guardar en memoria y cuando el usuario retome la conexión a internet se enviaran las peticiones.
+
+import { createBrowserHistory } from 'history'
+import ReactGA from 'react-ga'
+
+const history = createBrowserHistory()
+ReactGA.initialize('UA-000000-01')
+ReactGA.pageview(window.location.pathname + window.location.search)
+history.listen(function(location) {
+  ReactGA.pageview(window.location.pathname + window.location.search)
+})
+
+// En el service-worker.js | Para que google googleAnalytics funcione online
+workbox.googleAnalytics.initialize()

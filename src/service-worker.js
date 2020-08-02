@@ -11,6 +11,9 @@ workbox.precaching.precacheAndRoute(self.__precacheManifest, {})
 
 workbox.routing.registerNavigationRoute('/index.html')
 
+// Para que google googleAnalytics funcione online
+workbox.googleAnalytics.initialize()
+
 // La API usa la estategia Stale While Revalidate para mayor velocidad
 workbox.routing.registerRoute(/^https?:\/\/www.themealdb.com\/api\/.*/, 
     workbox.strategies.staleWhileRevalidate(),
