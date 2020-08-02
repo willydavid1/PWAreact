@@ -19,6 +19,19 @@ workbox.routing.registerRoute(/^https?:\/\/www.themealdb.com\/api\/.*/,
     workbox.strategies.staleWhileRevalidate(),
     'GET')
 
+workbox.routing.registerRoute(
+  /^https?:\/\/www.themealdb.com\/images\/.*/,
+  new workbox.strategies.CacheFirst({
+    cacheName: 'image-cache',
+    plugins: [
+      new workbox.expiration.Plugin({
+        maxAgeSeconds: 24 * 60 * 60,
+        maxEntries: 20
+      })
+    ]
+  })
+)
+
 // La fuente usa la estategia cacheFirst
 workbox.routing.registerRoute(/^https:\/\/fonts.(?:googleapis|gstatic).com\/(.*)/,
     workbox.strategies.cacheFirst({
