@@ -87,3 +87,22 @@ Para implementar nuestro propio service worker usaremos Workbox, una librería c
 Hay un pequeño detalle al momento de implementar Workbox en nuestro proyecto y es que estamos yendo en contra de los principios de Create React App y esto solo significa una cosa “eject”, esto nos llenaría de archivos que no nos sirven. Para evitar hacer eject vamos a instalar react-app-rewired y el plugin para webpack de workbox.
 
 npm add workbox-webpack-plugin react-app-rewire-workbox react-app-rewired | adicional en la raiz del proyecto creamos un config-overrides.js y dentro del src el service-worker.js y los script del package cambiarlos por react-app-rewired ejemplo => "dev": "react-app-rewired start",
+
+
+---- Implementando Workbox ----
+En esta clase vamos a ver como implementar estrategias de carga con Workbox.
+
+El funcionamiento de un service worker por defecto toma una lista de assets para precargarlos y si la ruta coincide exactamente con un asset entonces lo tomara de cache.
+
+Workbox tiene una característica llamada registerNavigationRoute la cual se encarga de hacer el funcionamiento por defecto de un service worker más aparte si encuentra una url que no conoce va a buscar una url, en este caso index.html y que el se encargue de lo que va a mostrar.
+workbox.routing.registerNavigationRoute('/index.html') | nueva linea en el config-overrides.js
+
+Existen diferentes estrategias de carga.
+La primera y fundamental se llama Network Only. Esta se encarga checar si hay conexión a internet, si existe una conexión realiza la petición de información, en caso de no haber conexión se rompe la página.
+
+¿Cuándo usar Network Only?
+Por defecto si no queremos cache o manejamos información en tiempo real.
+
+Network First es otra estrategia de carga, se encarga mandar la petición a internet, si la conexión a internet esta caída entonces tomara la información que tenga almacenada en cache.
+¿Cuándo usar Network First?
+Cuando queremos la última versión de un asset y tener soporte offline.
