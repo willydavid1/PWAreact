@@ -106,3 +106,21 @@ Por defecto si no queremos cache o manejamos información en tiempo real.
 Network First es otra estrategia de carga, se encarga mandar la petición a internet, si la conexión a internet esta caída entonces tomara la información que tenga almacenada en cache.
 ¿Cuándo usar Network First?
 Cuando queremos la última versión de un asset y tener soporte offline.
+
+
+
+---- Aplicando Estrategias de Carga ----
+En esta clase vamos a analizar diferentes estrategias de carga, veremos sus ventajas y desventajas.
+
+• Cache First.
+Es una estrategia de carga que lo primero que hace es ir al cache y si encuentra el recurso lo sirve directamente desde la cache. En caso de no encontrarlo va a ir a red, guardar la información en cache y servir esa versión.
+Esta estrategia puede ser peligrosa y solo es recomendable cuando queremos máxima velocidad y estamos manejando un recurso que nunca cambia, como una imagen o alguna fuente.
+    Podemos pasarle unas opciones junto el plugin de new workbox.expiration.Plugin({ maxAgeSeconds: 24 * 60 * 60 }) para decirle que expire en 24 horas por ejemplo
+
+• Stale While Revalidate
+Esta es una estrategia de carga muy particular y que mejor funciona a la hora de mejorar el rendimiento. Lo que hace es ir a cache y a red al mismo tiempo, toma la versión más rápida que siempre será la de cache y en cuanto recibe la de red va a actualizar la versión de cache.
+Es recomendable esta estrategia cuando queremos mucha velocidad y estamos manejando un recurso que puede estar levemente desactualizado.
+
+• Network First es otra estrategia de carga, se encarga mandar la petición a internet, si la conexión a internet esta caída entonces tomara la información que tenga almacenada en cache.
+
+Al momento de escribir nuestras estrategias en Workbox SI IMPORTA el orden en que pongamos las cosas, si queremos una estrategia o regla por defecto debemos poner esa regla hasta el final de todo.
