@@ -72,3 +72,18 @@ Para iphone agregar estos metadata para IOS en el index.html
 Son la característica más importante de una PWA.
 Es lo que hace posible que las PWA funcionen, es un script que nuestro navegador corre detrás de escena y este no puede tocar el DOM.
 Podemos tener control absoluto a nivel red de nuestra aplicación gracias a los service workers. Por lo que podemos dar soporte Offline o tambien podemos usar push notifications
+
+
+---- Introducción a Workbox ----
+En esta clase vamos a ver como implementar service workers en nuestra aplicación.
+Los service workers solo funcionan en producción.
+Una recomendación siempre que trabajemos con service workers es ir a Clear Storage en la tab de Application de las DevTools, y limpiar la información del sitio. Esto desinstalara todo lo que es cache y limpiara los service workers.
+
+Quienes habrán prestado atención a la documentación de create-react-app habrán leído que este incluye un service worker.
+El service worker de Create React App hace algo llamado “SW Precache“, lo que hace es precargar y dejar disponibles offline todos los archivos necesarios para correr la aplicación. Una recomendación a la hora de hacer debugging es refrescar el sitio pues un service worker por lo general se inicializa después de la primera carga.
+
+NUNCA conviene escribir nuestro propio service worker especialmente con herramientas de bajo nivel.
+Para implementar nuestro propio service worker usaremos Workbox, una librería creada por Google para crear Service Workers.
+Hay un pequeño detalle al momento de implementar Workbox en nuestro proyecto y es que estamos yendo en contra de los principios de Create React App y esto solo significa una cosa “eject”, esto nos llenaría de archivos que no nos sirven. Para evitar hacer eject vamos a instalar react-app-rewired y el plugin para webpack de workbox.
+
+npm add workbox-webpack-plugin react-app-rewire-workbox react-app-rewired | adicional en la raiz del proyecto creamos un config-overrides.js y dentro del src el service-worker.js y los script del package cambiarlos por react-app-rewired ejemplo => "dev": "react-app-rewired start",
