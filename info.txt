@@ -145,3 +145,12 @@ history.listen(function(location) {
 
 // En el service-worker.js | Para que google googleAnalytics funcione online
 workbox.googleAnalytics.initialize()
+
+
+
+---- Web Share API ----
+Web Share API es una API que nos permite usar el Share nativo del sistema operativo.
+
+Para implementarlo hay que tener presente que solo funcionara si hacemos click a algún link, esto es una medida de precaución para que nadie abuse de la API obligándonos a tener que compartir algo que no queremos. Además, Web Share API por el momento solo funciona en Android así que tenemos que detectar si tenemos la característica para poder usarla.
+
+Web Share API solamente funciona con HTTPS.
