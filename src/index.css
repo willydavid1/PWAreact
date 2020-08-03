@@ -3,3 +3,13 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.offline {
+  position: fixed;
+  bottom: 0;
+  background: red;
+  color: white;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+}
