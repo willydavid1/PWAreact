@@ -24,6 +24,7 @@ export default class App extends React.Component {
           <IfOffline> ESTAS EN MODO OFFLINE </IfOffline>
           <header>
             <Link to="/">Recetas</Link>
+            <Link to="/timer" className="timerLink">⏱</Link>
           </header>
 
           <main>
