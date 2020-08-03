@@ -11,6 +11,7 @@ PWA que utiliza la API de MealDB para mostrar recetas con sus instrucciones. Alg
 * Creado con [Create React App](https://create-react-app.dev/)
 
 [Ver La APP](https://pwa-react.vercel.app/)
+https://pwa-react.vercel.app/
 
 ## Scripts 
 * `npm install` para instalar las dependencias
