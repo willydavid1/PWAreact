@@ -7,6 +7,8 @@ export default class IfOffline extends Component {
     
     componentDidMount() {
         if (!window) return
+        if (!window.navigator.onLine) this.goOffline()
+
         // cuando el navegador nos indica que estamos online o offline llamamos a los metodos
         window.addEventListener('online', this.goOnline)
         window.addEventListener('offline', this.goOffline)
